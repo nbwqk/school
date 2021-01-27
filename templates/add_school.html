@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学校</title>
+</head>
+<body>
+<h2>添加学校</h2>
+<hr>
+<form action="{% url 'app1:add_school' %}" method="post">
+    {% csrf_token %}
+    学校名称：<input type="text" name="s_name"><br>
+    {{ form.s_name.errors }}
+    校长：<select name="s_master">
+            {% for t in teacher %}
+            <option value="{{ t.t_name }}">{{ t.t_name }}</option>
+            {% endfor %}
+         </select><br>
+         <input type="submit">
+</form>
+<hr>
+<table>
+    <tr>
+        <td>学校</td>
+        <td>校长</td>
+    </tr>
+    <tr>
+        {% for s in school %}
+            <td>{{ s.s_name }}</td>
+            <td>{{ s.master.t_name }}</td>
+        {% endfor %}
+    </tr>
+</table>
+</body>
+</html>

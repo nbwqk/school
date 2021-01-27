@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加年级</title>
+</head>
+<body>
+<h2>添加年级</h2>
+<hr>
+<form action="{% url 'app1:add_grade' %}" method="post">
+    {% csrf_token %}
+    年级：<input type="text" name="g_name"><br>
+    {{ form.g_name.errors }}
+    学校:<select name="school">
+           {% for s in school %}
+               <option value="{{ s.s_name }}">{{ s.s_name }}</option>
+           {% endfor %}
+        </select><br>
+    段主任：<select name="g_master">
+              {% for t in teacher %}
+                  <option value="{{ t.t_name }}">{{ t.t_name }}</option>
+              {% endfor %}
+           </select><br>
+    <input type="submit">
+</form>
+<hr>
+<table>
+    <tr>
+        <td>学校</td>
+        <td>段长</td>
+        <td>年级</td>
+    </tr>
+    {% for g in grade %}
+        <tr>
+           <td>{{ g.school.s_name }}</td>
+           <td>{{ g.g_master.t_name }}</td>
+           <td>{{ g.g_name }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

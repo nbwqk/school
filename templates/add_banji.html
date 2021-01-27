@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加班级</title>
+</head>
+<body>
+<h2>添加班级</h2>
+<hr>
+<form action="{% url 'app1:add_banji' %}" method="post">
+    {% csrf_token %}
+    班级：<input type="text" name="b_name"><br>
+    {{ form.b_name.errors }}
+    年级:<select name="grade">
+           {% for g in grade %}
+               <option value="{{ g.g_name }}">{{ g.g_name }}</option>
+           {% endfor %}
+        </select><br>
+    班主任：<select name="b_master">
+             {% for t in teacher %}
+                 <option value="{{ t.t_name }}">{{ t.t_name }}</option>
+             {% endfor %}
+           </select><br>
+    <input type="submit">
+</form>
+<hr>
+<table>
+    <tr>
+        <td>年级</td>
+        <td>班级</td>
+        <td>班主任</td>
+    </tr>
+    {% for b in banji %}
+        <tr>
+           <td>{{ b.grade.g_name }}</td>
+           <td>{{ b.b_name }}</td>
+           <td>{{ b.b_master.t_name }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

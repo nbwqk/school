@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加分数</title>
+</head>
+<body>
+<h2>添加分数</h2>
+<hr>
+<form action="{% url 'app1:add_score' %}" method="post">
+    {% csrf_token %}
+    考试名称<input type="text" name="s_name"><br>
+    学科<select name="course">
+          {% for c in course %}
+              <option value="{{ c.c_name }}">{{ c.c_name }}</option>
+          {% endfor %}
+       </select><br>
+    年级
+    得分<input type="text" name="s_value"><br>
+
+</form>
+</body>
+</html>

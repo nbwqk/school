@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择考试班级</title>
+</head>
+<body>
+<h2>请选择考试班级</h2>
+<hr>
+<form action="{% url 'app1:score_banji' %}" method="post">
+    {% csrf_token %}
+    年级<select name="grade">
+         {% for g in grade %}
+           <option value="{{ g.g_name }}">{{ g.g_name }}</option>
+         {% endfor %}
+        </select>
+    班级<select name="banji">
+           <option value="1班">1班</option>
+           <option value="2班">2班</option>
+           <option value="3班">3班</option>
+           <option value="4班">4班</option>
+       </select>
+    <input type="submit">
+</form>
+</body>
+</html>

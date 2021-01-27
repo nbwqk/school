@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学生</title>
+</head>
+<body>
+<h2>添加学生</h2>
+<hr>
+<form action="{% url 'app1:add_student' %}" method="post">
+    {% csrf_token %}
+    姓名：<input type="text" name="s_name"><br>
+    {{ form.s_name.errors }}
+    性别：<select name="s_sex">
+            <option value="男">男</option>
+            <option value="女">女</option>
+            <option value="保密">保密</option>
+         </select><br>
+    年龄：<input type="text" name="s_age"><br>
+    年级：<select name="grade">
+            {% for g in grade %}
+               <option value="{{ g.g_name }}">{{ g.g_name }}</option>
+            {% endfor%}
+         </select>
+    班级：<select name="banji">
+               <option value="1班">1班</option>
+               <option value="2班">2班</option>
+               <option value="3班">3班</option>
+               <option value="4班">4班</option>
+         </select><br>
+    <input type="submit">
+</form>
+<hr>
+<table>
+    <tr>
+        <td>姓名</td>
+        <td>性别</td>
+        <td>年龄</td>
+        <td>年级</td>
+        <td>班级</td>
+    </tr>
+    {% for s in student %}
+        <tr>
+           <td>{{ s.s_name }}</td>
+           <td>{{ s.s_sex }}</td>
+           <td>{{ s.s_age }}</td>
+           <td>{{ s.grade.g_name }}</td>
+           <td>{{ s.banji.b_name }}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
