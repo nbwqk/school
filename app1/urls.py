@@ -30,4 +30,6 @@ urlpatterns = [
     path('add_student/',views.add_student,name='add_student'),
     path('add_score/',views.add_score,name='add_score'),
     path('score_banji/',views.score_banji,name='score_banji'),
+    path('clear_session/',views.clear_session,name='clear_session'),
+    path('tongji/',views.tongji,name='tongji'),
 ]

@@ -49,3 +49,14 @@ class Add_student(forms.Form):
     s_age=forms.CharField(max_length=20)
     grade=forms.CharField(max_length=20)
     banji=forms.CharField(max_length=20)
+
+class Add_score(forms.Form):
+    s_name=forms.CharField(max_length=20,required=True,
+                           error_messages={'required':'必须填写考试名称',
+                                          'max_value':'不能超过20个字符'})
+    course=forms.CharField(max_length=20)
+    grade=forms.CharField(max_length=20)
+    banji = forms.CharField(max_length=20)
+    student=forms.CharField(max_length=20)
+    s_time=forms.DateField()
+    s_value=forms.CharField(max_length=20)

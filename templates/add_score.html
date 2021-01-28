@@ -10,14 +10,49 @@
 <form action="{% url 'app1:add_score' %}" method="post">
     {% csrf_token %}
     考试名称<input type="text" name="s_name"><br>
+    {{ form.s_name.errors }}
     学科<select name="course">
           {% for c in course %}
               <option value="{{ c.c_name }}">{{ c.c_name }}</option>
           {% endfor %}
        </select><br>
-    年级
+    年级<input type="text" name="grade" value="{{ grade }}" >
+    班级<input type="text" name="banji" value="{{ banji }}" >
+    <a href="{% url 'app1:score_banji' %}">修改年级和班级</a><br>
+    {{ form.grade.errors }}
+    {{ form.banji.errors }}
+    学生<select name="student">
+          {% for s in student %}
+              <option value="{{ s.s_name }}">{{ s.s_name }}</option>
+          {% endfor %}
+       </select>
+    考试日期<input type="date" name="s_time"><br>
     得分<input type="text" name="s_value"><br>
-
-</form>
+    <input type="submit">
+</form><br>
+<a href="{% url 'app1:tongji' %}">查看成绩统计信息</a>
+<hr>
+<table>
+    <tr>
+        <td>考试名称</td>
+        <td>考试科目</td>
+        <td>年级</td>
+        <td>班级</td>
+        <td>学生</td>
+        <td>考试成绩</td>
+        <td>考试日期</td>
+    </tr>
+    {% for s in score %}
+        <tr>
+           <td>{{ s.s_name }}</td>
+           <td>{{ s.course.c_name }}</td>
+           <td>{{ s.student.grade.g_name }}</td>
+           <td>{{ s.student.banji.b_name }}</td>
+           <td>{{ s.student.s_name }}</td>
+           <td>{{ s.s_value }}</td>
+           <td>{{ s.s_time }}</td>
+        </tr>
+    {% endfor %}
+</table>
 </body>
 </html>
